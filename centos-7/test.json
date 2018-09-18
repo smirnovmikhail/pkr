@@ -1,0 +1,23 @@
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sudo yum clean all",
+      "sudo yum install -y epel-release",
+      "sudo yum install -y ansible",
+      "sudo yum update -y",
+      "sudo yum clean all"
+    ]
+  },
+  {
+    "type": "ansible-local",
+    "playbook_file": "../../../../pre_configure.yml", 
+    "role_paths": [ 
+        "../../../../roles/preconf",
+        "../../../../roles/repo-epel",
+        "../../../../roles/ntp",
+        "../../../../roles/zabbix-agent"
+    ],
+    "group_vars": "../../../../vars",
+    "playbook_dir": "../../../../playbooks"
+    } ]
+} 
