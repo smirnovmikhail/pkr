@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  vars:
+    users:
+      alice:
+        name: Alice Appleworth
+        telephone: 123-456-7890
+      bob:
+        name: Bob Bananarama
+        telephone: 987-654-3210
+      jonn:
+        name: Jonn Smith
+        telephone: 555-555-5555
+    host_users:
+      - jonn
+      - bob
+  tasks:
+    - name: Print phone records
+      debug:
+        msg: "User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+      loop: "{{ lookup('dict', users) }}"
+    - name: Print phone records
+      debug:
+        msg: "User {{ item }}  {{ users[item].name }}  {{ users[item].telephone }} "
+        #verbosity: 1
+      with_items:
+        - "{{ host_users }}"
+
